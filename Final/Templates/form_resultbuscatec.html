@@ -1,0 +1,53 @@
+{% extends 'padre.html' %}
+
+{% block bloqueLibre1 %}
+        
+    <p>Estamos buscando las tecnicos en el turno: <strong>{{turno}}</strong></p>
+
+    
+    {% if tec %}
+    
+    <ul>
+    <section class="ListaTecnicos" >
+        {% for a in tec %}
+            <!--<li> <b style="background-color:rgb(148, 210, 238) ;">Agencia: </b><b style="color: black ;">{{a.rsoc}}</b> / <b style="background-color:rgb(148, 210, 238) ;">Zona:</b><strong> {{a.zona}}</strong></li>-->
+            
+        <div class="card" style="width: 14rem;">
+                <img src="https://i.postimg.cc/3JD7Kh8c/401156.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">Nombre: {{a.nombre}} Apellido: {{a.apellido}}.</h5>
+                <h6 class="card-text">Ingreso: {{a.fecha_ingreso}}.</h6>
+                <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+                </div>
+                    
+        </div>        
+        {% endfor %}
+    </section>
+
+    
+    {% else %}
+
+        <p>No hubo coincidencias</p>        
+
+    </ul>
+    {% endif %}
+        
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+{% endblock bloqueLibre1 %}

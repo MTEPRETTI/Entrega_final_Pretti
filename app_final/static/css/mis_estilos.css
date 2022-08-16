@@ -1,0 +1,22 @@
+
+.ListaTecnicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 20px;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.ListaSucursales {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 20px;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+}

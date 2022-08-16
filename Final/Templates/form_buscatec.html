@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block bloqueLibre1 %}
+
+<form action="{% url 'buscartec' %}" method="GET"> {% csrf_token %}
+
+    <p>Turno: <input type="text" name="turno"></p>
+  
+
+    <input type="submit" value="Buscar">
+
+</form>
+
+{% endblock bloqueLibre1 %}
