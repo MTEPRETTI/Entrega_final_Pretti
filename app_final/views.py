@@ -1,9 +1,39 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from app_final.models import Tecnicos, Sucursales, Vehiculo
-from app_final.forms import AppForm_Tecnicos, AppForm_Sucursales, AppForm_Vehiculos
-
+from .forms import AppForm_Vehiculos
+from app_final.models import Tecnicos, Sucuarsales, Vehiculo
+from app_final.forms import AppForm_Tecnicos, AppForm_Sucuarsales
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 # Create your views here.
+
+#----------------Login------------------#
+
+def login_request(request):
+
+    if request.method== "POST":
+        form = AuthenticationForm(request.POST)
+        
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+
+            user = authenticate(username=usuario, password=contra)
+
+            if user is not None:
+                login(request, user)
+
+                return render(request,'home.html', {'mensaje':f'Bienvenido {usuario}'})
+
+            else:
+
+                return render(request,'home.html', {'mensaje':f'Error datos incorrectos'})
+
+        return render(request,'home.html', {'mensaje':f'Formulario erroneo'})
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form':form})
 
 #----------------paginas sin clases------------------#
 def home(self):
@@ -32,7 +62,10 @@ def vehiculos(self):
 
     return render(self,'vehiculos.html')
 
-#----------------FORMULARIOS------------------#
+
+#----------------FORMULARIO TECNICOS------------------#
+
+
 def formulario_tecnicos(request):
 
     print('method:', request.method)
@@ -81,6 +114,9 @@ def buscartec(request):
     return HttpResponse(respuesta)
 
 
+#----------------FORMULARIO SUCURSALES------------------#
+
+
 def formulario_sucursales(request):
 
     print('method:', request.method)
@@ -88,20 +124,20 @@ def formulario_sucursales(request):
     
     if request.method == 'POST':
 
-        miFormularioSuc = AppForm_Sucursales(request.POST)
+        miFormularioSuc = AppForm_Sucuarsales(request.POST)
 
         if miFormularioSuc.is_valid():
 
             data = miFormularioSuc.cleaned_data
             
-            sucursal = Sucursales(rsoc=data['rsoc'], zona=data['zona'])
+            sucursal = Sucuarsales(rsoc=data['rsoc'], zona=data['zona'])
             
             sucursal.save()
             
             return render(request, 'home.html')
     else:
         
-        miFormularioSuc = AppForm_Sucursales()
+        miFormularioSuc = AppForm_Sucuarsales()
 
 
     return render(request,'form_ingresoSuc.html', {'miFormularioSuc':miFormularioSuc})
@@ -118,13 +154,61 @@ def buscarsuc(request):
 
         zona = request.GET["zona"]
 
-        suc = Sucursales.objects.filter(zona__icontains=zona)
+        rsoc = Sucuarsales.objects.filter(zona__icontains=zona)
 
-        return render(request, "form_resultbuscatec.html", {"suc": suc, "nombre":zona})
-    
+        return render(request, "form_resultbuscasuc.html", {"zona": zona, "rsoc":rsoc})
+
     else:
 
         respuesta = 'No enviaste datos'
 
     return HttpResponse(respuesta)
     
+
+#----------------FORMULARIO VEHICULOS------------------#
+
+
+def formulario_vehiculos(request):
+
+    print('method:', request.method)
+    print('post:', request.POST)
+    
+    if request.method == 'POST':
+
+        miFormularioVehi = AppForm_Vehiculos(request.POST)
+
+        if miFormularioVehi.is_valid():
+
+            data = miFormularioVehi.cleaned_data
+            
+            vehiculos = Vehiculo(marca=data['marca'], modelo=data['modelo'])
+            
+            vehiculos.save()
+            
+            return render(request, 'home.html')
+    else:
+        
+        miFormularioVehi = AppForm_Vehiculos()
+
+
+    return render(request,'form_ingresoVehi.html', {'miFormularioVehi':miFormularioVehi})
+
+
+def buscavehi(request):
+
+    return render(request,'form_buscavehi.html')
+
+
+def buscarvehi(request):
+
+    if request.GET["marca"]:
+
+        marca = request.GET["marca"]
+
+        modelo = Vehiculo.objects.filter(marca__icontains=marca)
+
+        return render(request, "form_resultbusvehi.html", {"marca": marca, "modelo": modelo})
+
+    else:
+
+        respuesta = 'No enviaste datos'

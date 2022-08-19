@@ -9,7 +9,7 @@ class Tecnicos(models.Model):
     turno = models.CharField(max_length=40)
     fecha_ingreso = models.DateField()
 
-class Sucursales(models.Model):
+class Sucuarsales(models.Model):
 
     zona = models.CharField(max_length=40)
     rsoc = models.CharField(max_length=40)

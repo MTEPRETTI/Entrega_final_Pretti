@@ -9,14 +9,14 @@
     
     <ul>
     <section class="ListaTecnicos" >
-        {% for a in tec %}
+        {% for t in tec %}
             <!--<li> <b style="background-color:rgb(148, 210, 238) ;">Agencia: </b><b style="color: black ;">{{a.rsoc}}</b> / <b style="background-color:rgb(148, 210, 238) ;">Zona:</b><strong> {{a.zona}}</strong></li>-->
             
         <div class="card" style="width: 14rem;">
                 <img src="https://i.postimg.cc/3JD7Kh8c/401156.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                <h5 class="card-title">Nombre: {{a.nombre}} Apellido: {{a.apellido}}.</h5>
-                <h6 class="card-text">Ingreso: {{a.fecha_ingreso}}.</h6>
+                <h5 class="card-title">Nombre: {{t.nombre}} Apellido: {{t.apellido}}.</h5>
+                <h6 class="card-text">Ingreso: {{t.fecha_ingreso}}.</h6>
                 <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
                 </div>
                     

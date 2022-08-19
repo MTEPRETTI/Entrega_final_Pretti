@@ -1,0 +1,13 @@
+{% extends 'padre.html' %}
+
+{% block bloqueLibre1 %}
+
+<form action="{% url 'formvehi' %}" method="POST"> {% csrf_token %}
+
+    {{miFormularioVehi.as_p}}
+
+    <input type="submit" value="Enviar">
+
+</form>
+
+{% endblock bloqueLibre1 %}

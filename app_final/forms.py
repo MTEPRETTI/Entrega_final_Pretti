@@ -9,7 +9,7 @@ class AppForm_Tecnicos(forms.Form):
     turno = forms.CharField()
     fecha_ingreso = forms.DateField()
 
-class AppForm_Sucursales(forms.Form):
+class AppForm_Sucuarsales(forms.Form):
 
     zona = forms.CharField()
     rsoc = forms.CharField()

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app_final.views import about, home, sucursales, tecnicos, vehiculos, padre, formulario_tecnicos, buscatec, buscartec, formulario_sucursales, buscasuc, buscarsuc
+from app_final.views import about, home, sucursales, tecnicos, vehiculos, padre, formulario_tecnicos, buscatec, buscartec, formulario_sucursales, buscasuc, buscarsuc, formulario_vehiculos, buscavehi, buscarvehi, login_request
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +31,8 @@ urlpatterns = [
     path('formulariosuc/', formulario_sucursales, name="formsuc"),
     path('buscasuc/', buscasuc,name='buscasuc'), 
     path('buscarsuc/', buscarsuc,name='buscarsuc'), 
+    path('formulariovehi/', formulario_vehiculos, name="formvehi"),
+    path('buscavehi/', buscavehi,name='buscavehi'), 
+    path('buscarvehi/', buscarvehi,name='buscarvehi'), 
+    path('login/', login_request,name='login'), 
 ]
