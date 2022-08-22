@@ -38,3 +38,17 @@ class Busca_Vehiculos(forms.Form):
 
     marca = forms.CharField()
     modelo = forms.CharField()
+
+#----------- Formulario para el alta-----------
+'''
+class UserRegisterForm(UserCreationForm):
+
+    email = forms.EmailField()
+    password1 = forms.CharField(label = 'Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label = 'Reingres Contraseña', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+        help_texts = {k:'' for k in fields}
+'''

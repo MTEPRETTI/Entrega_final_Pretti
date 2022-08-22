@@ -1,12 +1,31 @@
+from urllib import request
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import AppForm_Vehiculos
 from app_final.models import Tecnicos, Sucuarsales, Vehiculo
 from app_final.forms import AppForm_Tecnicos, AppForm_Sucuarsales
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 # Create your views here.
+#----------------Registro------------------#
+def register(request):
 
+    if request.method  == 'POST':
+        form = UserCreationForm(request.POST)
+        #form = UserRegisterForm(request.POST)
+
+        if form.is_valid():
+
+            username = form.cleaned_data['username']
+            form.save()
+            #return render(request,'home.html', {'mensaje','Usuario creado'})
+            return render(request,'home.html')
+    
+    else:
+        form = UserCreationForm()
+        #form = UserRegisterForm()
+    
+    return render(request,'register.html', {'form':form})
 #----------------Login------------------#
 
 def login_request(request):
