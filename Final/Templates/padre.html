@@ -31,7 +31,14 @@
             <a class="navbar-brand" href="{% url 'tecnicos' %}">Tecnicos</a>
             <a class="navbar-brand" href="{% url 'about' %}">About</a>
             <!--<a class="navbar-brand" href="{% url 'formsuc' %}">SUC</a>-->
-            <a class="btn btn-primary" href="{% url 'login' %}">Ingresar</a>
+
+            {% if user.is_authenticated %}
+                <p style="color: Black;">Bienvenido {{user.username}}</p>
+                <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+            {% endif %}
+            
             </div>
         </nav>
         <!-- Masthead-->

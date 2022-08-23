@@ -6,6 +6,8 @@ from app_final.models import Tecnicos, Sucuarsales, Vehiculo
 from app_final.forms import AppForm_Tecnicos, AppForm_Sucuarsales
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 #----------------Registro------------------#
 def register(request):
@@ -31,7 +33,7 @@ def register(request):
 def login_request(request):
 
     if request.method== "POST":
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(request, data = request.POST)
         
         if form.is_valid():
             usuario = form.cleaned_data.get('username')
@@ -48,9 +50,11 @@ def login_request(request):
 
                 return render(request,'home.html', {'mensaje':f'Error datos incorrectos'})
 
-        return render(request,'home.html', {'mensaje':f'Formulario erroneo'})
-    else:
-        form = AuthenticationForm()
+        else:
+
+                return render(request,'home.html', {'mensaje':f'Formulario erroneo'})
+
+    form = AuthenticationForm()
 
     return render(request, 'login.html', {'form':form})
 
@@ -69,14 +73,17 @@ def padre(self):
 
 
 #----------------clases------------------#
+@login_required
 def tecnicos(self):
 
     return render(self,'tecnicos.html')
 
+@login_required
 def sucursales(self):
 
     return render(self,'sucursales.html')
 
+@login_required
 def vehiculos(self):
 
     return render(self,'vehiculos.html')
