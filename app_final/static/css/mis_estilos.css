@@ -31,3 +31,12 @@
     align-items: center;
 
 }
+
+
+.Fondo{
+    display: table-row;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}

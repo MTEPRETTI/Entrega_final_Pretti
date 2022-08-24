@@ -1,0 +1,13 @@
+{% extends 'padre.html' %}
+
+
+{% block bloqueLibre1 %}
+<body style="color: rgb(255, 255, 255)">
+
+    <h1>No tiene acceso a este formulario</h1>
+    <h2>Elija una opcion</h2>
+    <a class="btn btn-primary" href="{% url 'home' %}">Home</a>
+    <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+</body>
+{% endblock bloqueLibre1 %}
+    

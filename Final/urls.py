@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LogoutView
-from app_final.views import about, home, sucursales, tecnicos, vehiculos, padre, formulario_tecnicos, buscatec, buscartec, formulario_sucursales, buscasuc, buscarsuc, formulario_vehiculos, buscavehi, buscarvehi, login_request, register
+from app_final.views import about, home, sucursales, tecnicos, vehiculos, padre, formulario_tecnicos, buscatec, buscartec, formulario_sucursales, buscasuc, buscarsuc, formulario_vehiculos, buscavehi, buscarvehi, login_request, register, sin_acceso, ReadTecnicos, ReadVehiculos, ReadSucursales, DelTecnicos, DelVehiculos, DelSucursales
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +39,11 @@ urlpatterns = [
     path('register/', register,name='register'), 
     path('logout/', LogoutView.as_view(template_name='logout.html'),name='logout'), 
     path('bienvenida/', register,name='register'), 
+    path('sin_acceso/', sin_acceso, name='sin_acceso'),
+    path('readtec/', ReadTecnicos, name='readtec'),
+    path('readveh/', ReadVehiculos, name='readveh'),
+    path('readsuc/', ReadSucursales, name='readsuc'),
+    path('deltec/<tecnico_nombre>', DelTecnicos, name='deltec'),
+    path('delveh/<vehiculo_modelo>', DelVehiculos, name='delveh'),
+    path('delsuc/<sucursal_zona>', DelSucursales, name='delsuc'),
 ]

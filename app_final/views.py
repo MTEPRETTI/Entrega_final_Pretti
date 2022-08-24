@@ -1,3 +1,4 @@
+import re
 from urllib import request
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -8,6 +9,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
 # Create your views here.
 #----------------Registro------------------#
 def register(request):
@@ -71,6 +74,10 @@ def padre(self):
 
     return render(self,'padre.html')
 
+def sin_acceso(self):
+
+    return render(self,'sin_acceso.html')
+
 
 #----------------clases------------------#
 @login_required
@@ -91,7 +98,7 @@ def vehiculos(self):
 
 #----------------FORMULARIO TECNICOS------------------#
 
-
+@staff_member_required(login_url='/sin_acceso/')
 def formulario_tecnicos(request):
 
     print('method:', request.method)
@@ -142,7 +149,7 @@ def buscartec(request):
 
 #----------------FORMULARIO SUCURSALES------------------#
 
-
+@staff_member_required(login_url='/sin_acceso/')
 def formulario_sucursales(request):
 
     print('method:', request.method)
@@ -193,7 +200,7 @@ def buscarsuc(request):
 
 #----------------FORMULARIO VEHICULOS------------------#
 
-
+@staff_member_required(login_url='/sin_acceso/')
 def formulario_vehiculos(request):
 
     print('method:', request.method)
@@ -238,3 +245,75 @@ def buscarvehi(request):
     else:
 
         respuesta = 'No enviaste datos'
+
+#----------------CRUD READ Tecnicos------------------#
+
+def ReadTecnicos(request):
+
+    tecnicos = Tecnicos.objects.all()
+
+    contexto = {'Tecnicos': tecnicos}
+
+    return render(request, 'ReadTecnicos.html', contexto)
+
+#----------------CRUD READ VEHICULOS------------------#
+
+def ReadVehiculos(request):
+
+    vehiculos = Vehiculo.objects.all()
+
+    contexto = {'Vehiculos': vehiculos}
+
+    return render(request, 'ReadVehiculos.html', contexto)
+
+#----------------CRUD READ SUCURSALES------------------#
+
+def ReadSucursales(request):
+
+    sucursales = Sucuarsales.objects.all()
+
+    contexto = {'Sucursales': sucursales}
+
+    return render(request, 'ReadSucursales.html', contexto)
+
+#----------------CRUD DEL Tecnicos------------------#
+
+@staff_member_required(login_url='/sin_acceso/')
+def DelTecnicos(request, tecnico_nombre):
+
+    tecnico = Tecnicos.objects.get(nombre = tecnico_nombre)
+    tecnico.delete()
+
+    tecnicos = Tecnicos.objects.all()
+
+    contexto = {'Tecnicos': tecnicos}
+
+    return render(request, 'ReadTecnicos.html', contexto)   
+
+#----------------CRUD DEL Vehiculos------------------#
+
+@staff_member_required(login_url='/sin_acceso/')
+def DelVehiculos(request, vehiculo_modelo):
+
+    modelo = Vehiculo.objects.get(modelo = vehiculo_modelo)
+    modelo.delete()
+
+    vehiculos = Vehiculo.objects.all()
+
+    contexto = {'Vehiculos': vehiculos}
+
+    return render(request, 'ReadVehiculos.html', contexto)  
+
+#----------------CRUD DEL Sucursales------------------#
+
+@staff_member_required(login_url='/sin_acceso/')
+def DelSucursales(request, sucursal_zona):
+
+    zona = Sucuarsales.objects.get(zona = sucursal_zona)
+    zona.delete()
+
+    sucursales = Sucuarsales.objects.all()
+
+    contexto = {'Sucursales': sucursales}
+
+    return render(request, 'ReadSucursales.html', contexto)

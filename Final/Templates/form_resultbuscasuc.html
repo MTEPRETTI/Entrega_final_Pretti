@@ -2,7 +2,7 @@
 
 {% block bloqueLibre1 %}
         
-    <p>Estamos buscando las tecnicos en el turno: <strong>{{turno}}</strong></p>
+    <p>Estamos buscando las sucursales en la zona: <strong>{{zona}}</strong></p>
 
     
     {% if rsoc %}
@@ -15,8 +15,8 @@
         <div class="card" style="width: 14rem;">
                 <img src="https://i.postimg.cc/3JD7Kh8c/401156.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                <h7 class="card-title">zona: {{s.zona}}</h7>
-                <h6 class="card-text">Razon Social: {{s.rsoc}}.</h6>
+                <h7 class="card-title">Sucursal:</h7>
+                <h6 class="card-text">{{s.rsoc}}</h6>
                 <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
                 </div>
                     
