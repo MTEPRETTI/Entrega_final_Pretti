@@ -46,4 +46,5 @@ urlpatterns = [
     path('deltec/<tecnico_nombre>', DelTecnicos, name='deltec'),
     path('delveh/<vehiculo_modelo>', DelVehiculos, name='delveh'),
     path('delsuc/<sucursal_zona>', DelSucursales, name='delsuc'),
+        
 ]

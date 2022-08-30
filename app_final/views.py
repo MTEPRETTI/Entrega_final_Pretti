@@ -136,9 +136,11 @@ def buscartec(request):
 
         turno = request.GET["turno"]
 
+        #tec = Tecnicos.objects.filter(turno__icontains=turno)
         tec = Tecnicos.objects.filter(turno__icontains=turno)
 
         return render(request, "form_resultbuscatec.html", {"tec": tec, "nombre":turno})
+        #return render(request, "testtec.html", {"tec": tec, "nombre":turno})
     
     else:
 
